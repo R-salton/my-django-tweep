@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+
+
+    
+
+
+
+<section class=" homePage container-fluid">
+    
+    {% if messages %}
+        
+        {% for message in message  %}
+            <div class="feefback">
+                <h1>{{ message }}</h1>
+            </div>
+        {% endfor %}
+                    
+    {% endif %}
+        
+
+    <div class="row" style="padding-top: 1rem;">
+    
+            <div class="col-3 Slides">
+
+                <div id="carouselExampleSlidesOnly" class="Parentcarousel carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner w-80 ">
+                        <div class=" Carousel carousel-item active "  data-bs-interval="2000">
+                            <img src="{% static 'images/chat1.jpg'%}" class="d-block " alt="...">
+                        </div>
+
+                        <div class="carousel-item Carousel"  data-bs-interval="2000">
+                            <img src="{% static 'images/chat2.jpg'%}" class="d-block w-100" alt="...">
+                        </div>
+
+                        <div class="carousel-item Carousel"  data-bs-interval="2000">
+                            <img src="{% static 'images/people.png'%}" class="d-block w-100" alt="...">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+          
+
+
+                <div class=" col-6  mb-5" style="height: 90vh;">
+                    
+
+                        <div class=" homeBody mt-4 w-100 gap-3" style=" overflow:auto;position:relative; padding: 2rem;height: 100%;">
+                            
+                            {% if tweeps %}
+                            
+                            {% for tweep in tweeps  %}
+    
+    
+                            <div class="card " style="width: 300px; font-size: 12px; height: 15rem;">
+                                <div class="card-body">
+                                  <a href="{% url 'profile' tweep.user.id %}" style="text-decoration: none;"><p class="card-title text-primary">@{{ tweep.user}} Tweeped</p></a>
+                                  <p class="card-text">{{ tweep.body}}</p><br/>
+                                 
+                                 
+                                  
+
+                               
+                                  <div style="display:flex; flex-direction: row; align-items: center; gap: 1rem; padding-left: 0; position: absolute;bottom: 0;">
+                                    
+                                    <small class="text-muted">{{ tweep.created_at}}</small><br/> <br/>
+                                      <span class="like-count">{{ tweep.likes.count }} Likes</span> 
+                                      <form method="POST" action="{% url 'likes' %}">
+                                          {% csrf_token %}
+                                          <input type="hidden" name="tweep_id" value="{{ tweep.id }}">
+                                          
+                                          <button type="submit" style="border: none; background: transparent;font-size: 20px; color: lightseagreen;"><i class="fa-solid fa-heart"></i></button>
+                                          
+                                      </form>
+                                  </div>
+                            
+                                </div>
+                              </div>
+                          
+                                
+                            {% endfor %}
+                                
+                                
+                            {% endif %}
+                                
+                      
+                    </div>
+                </div>
+                
+                <div class="col-3 bg-white text-white" style="height: 100vh;">
+                     <!-- Replace with your base template -->
+                
+                {% if form %}
+                    
+               
+                    
+                   
+                    <h2>Post</h2>
+                    <form method="POST">
+                       {% csrf_token %}
+                        {{ form.as_p }}
+                       <button class="btn btn-primary" type="submit">Tweep</button>
+                    </form>
+                    {% endif %}
+                    
+                </div>
+
+    </div>
+</section>
+{% endblock %}

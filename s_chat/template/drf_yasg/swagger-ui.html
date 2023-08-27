@@ -1,0 +1,33 @@
+{% extends "drf-yasg/base.html" %}
+
+{% block extra_head %}
+{{ block.super }}
+<style>
+/* Custom CSS for styling if needed */
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="swagger-ui-container"></div>
+<script>
+const ui = SwaggerUIBundle({
+  url: "{% url 'schema-swagger-ui' %}",
+  dom_id: "#swagger-ui-container",
+  presets: [
+    SwaggerUIBundle.presets.apis,
+    SwaggerUIStandalonePreset
+  ],
+  layout: "BaseLayout",
+  docExpansion: "none",
+  deepLinking: true,
+  validatorUrl: null,
+  oauth2RedirectUrl: window.location.origin + "/accounts/callback",
+ 
+  showMutations: false,
+  requestInterceptor: function (request) {
+    // Handle token logic if needed
+    return request;
+  }
+});
+</script>
+{% endblock %}

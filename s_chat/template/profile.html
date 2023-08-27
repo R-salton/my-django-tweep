@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+
+
+    <div class="container text-center mt-3">
+
+    <div class="row">
+        <div class="col-8 ">
+
+            {% if profile %}
+        <h1>{{ profile.user.username }}'s Profile</h1><br/>
+
+        <br/>
+        
+      
+          
+       
+        {% for user_tweep in user_tweeps  %}
+
+
+                        <div class="card p-2 text-primary" style="width: 50%; height: 20rem; text-align: left;">
+                          <div class="head"><p>@{{ user_tweep.user}}</p></div>
+                            <div class="card-body align-content-start">
+                              <p>{{ user_tweep.body}}</p>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary w-50 mb-2 m-lg-2">View Profile</a>
+                          </div>
+                      
+                            
+                        {% endfor %}
+                        
+          
+        </div>
+        <div class="col-4">
+        <div class="card text-bg-light mb-3" style="max-width: 100%;">
+            <div class="card-header">Follows</div>
+          <div class="card-body">
+
+            <p class="card-text">{% for follow in profile.follows.all %}
+            <strong><a href="{% url 'profile' follow.user.id %}">@{{follow}}</a><br/></strong>
+
+        {% endfor %}</p>
+
+          </div>
+        </div>
+
+         <div class="card text-bg-light mb-3" style="max-width: 100%;">
+            <div class="card-header">Followed By</div>
+          <div class="card-body">
+
+            <p class="card-text">
+             {% for follow in profile.followed_by.all %}
+        <strong><a href="{% url 'profile' follow.user.id %}">@{{follow}}</a> <br/></strong>
+
+        {% endfor %}
+            </p>
+
+          </div>
+        </div>
+        <div class="card text-bg-light mb-3" style="max-width: 100%;">
+          <div class="card-header">YOUR TOKENS</div>
+        <div class="card-body">
+          
+          {% if tokens %}
+            
+            {% for token in tokens %}
+              
+            <p> Access Token: <input type="text" value={{ token.key}} /></p><br/>
+            
+              {% endfor %}
+            
+          {% endif %}
+            
+          </div>
+          </div>
+          <br/>
+          <form method="POST">
+            {% csrf_token %}
+            
+            {% if profile in user.profile.follows.all %}
+            <button class="btn btn-outline-danger" name="follow" value="unfollow" type="submit">Unfollow @{{ profile.user.username}}</button>
+            {% else %}
+            <button class="btn btn-outline-primary" name="follow" value="follow"  type="submit">Follow @{{ profile.user.username}}</button>             
+            {% endif %}
+              
+          </form>
+          <br/>
+          <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+
+        </div>
+
+    </div>
+
+
+    {% endif %}
+    </div>
+  </section>
+
+{% endblock %}

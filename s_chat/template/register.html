@@ -1,0 +1,18 @@
+{% extends 'base.html' %}  <!-- Replace with your base template -->
+
+{% block content %}
+<section>
+<div class="col-md-6 offset-md-3">
+
+
+    <h2>Register</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br/>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+
+</div>
+</section>
+{% endblock %}

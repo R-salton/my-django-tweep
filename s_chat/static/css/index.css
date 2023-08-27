@@ -1,0 +1,98 @@
+*{
+    font-color: #fff;
+}
+
+
+section{
+    padding: 2px;
+    marding: 0px;
+    
+    top: 5px;
+}
+li{
+    text-decoration: none;
+}
+
+.profiles{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.homePage{
+  
+    margin: 0;
+    background-color: red;
+    height:100vh;
+    background-image: url('../images/sky-blue-blue-sky-background.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    font-color: #fff;
+    overflow: hidden;
+    
+}
+
+section{
+    position: relative;
+    padding-top: 45px;
+}
+
+
+.Nav{
+    marding: 0;
+}
+
+.Slides{
+    display: block;
+    position: relative;
+    
+    height: 100vh;
+    background-color: #fff5;
+    margin-top: 20px;
+
+}
+
+.Parentcarousel{
+    position: absolute;
+    width: 20rem;
+    top: 2rem
+}
+
+.carousel-item img{
+   width: 100%;
+   height: 200px;
+   border-radius: 4px;
+}
+
+.homeBody{
+    display:flex;
+    width: 100%;
+    height: 100vh; 
+    overflow-y: scroll;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.centered_content{
+    position: relative;
+    overflow-y: scroll;
+    height:100%;
+    background-color: red;
+}
+
+#login{
+    position: relative;
+    top: 20rem;
+}
+
+.feedback{
+    width: 500px;
+    height: 200px;
+    padding: auto;
+    position: absolute:
+    
+}
